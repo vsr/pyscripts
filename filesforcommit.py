@@ -21,6 +21,8 @@ file_names = []
 if shas:
 	for sha in shas.split("\n"):
 		file_names.extend(subprocess.check_output("git show "+sha+" --name-only --format=format:").split("\n"))
-	print "\n".join(list(set(file_names) - set([""])))
+	file_names = list(set(file_names) - set([""]))
+	file_names.sort()
+	print "\n".join(file_names)
 else:
 	print "No commits found for message:"+message
